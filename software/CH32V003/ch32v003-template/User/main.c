@@ -32,6 +32,13 @@ void GPIO_Toggle_INIT(void)
     GPIO_Init(GPIOD, &GPIO_InitStructure);
 }
 
+void GoToIAP(void)
+{
+    RCC_ClearFlag();
+    SystemReset_StartMode(Start_Mode_BOOT);
+    NVIC_SystemReset();
+}
+
 /*********************************************************************
  * @fn      main
  *
@@ -51,9 +58,11 @@ int main(void)
     printf("GPIO Toggle TEST\r\n");
     GPIO_Toggle_INIT();
 
+    GoToIAP();
+
     while(1)
     {
-        Delay_Ms(1000);
-        GPIO_WriteBit(GPIOD, GPIO_Pin_0, (i == 0) ? (i = Bit_SET) : (i = Bit_RESET));
+        // Delay_Ms(1000);
+        // GPIO_WriteBit(GPIOD, GPIO_Pin_0, (i == 0) ? (i = Bit_SET) : (i = Bit_RESET));
     }
 }
