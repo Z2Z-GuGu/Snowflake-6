@@ -1,5 +1,6 @@
-TOOL_CHAIN_PATH ?= /opt/gcc-riscv/riscv-wch-embedded-gcc-v1.60/bin
-OPENOCD_PATH    ?= /opt/openocd/wch-openocd-v1.60/bin
+TOOL_CHAIN_PATH ?= ./Tools/RISC-V_Embedded_GCC/bin
+OPENOCD_PATH    ?= ./Tools/OpenOCD/bin
+WCHISP_PATH     ?= ./Tools/wchisp
 PROJECT_NAME    = app
 
 TOP_DIR     := .
@@ -104,3 +105,6 @@ flash:
 
 reset:
 	$(OPENOCD_PATH)/openocd -f $(OPENOCD_CFG) -c init -c reset -c resume -c exit
+
+isp:
+	sudo $(WCHISP_PATH)/wchisp -s -p /dev/ttyACM0 flash $(OUTPUT_DIR)/$(PROJECT_NAME).hex
