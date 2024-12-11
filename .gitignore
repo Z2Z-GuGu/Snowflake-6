@@ -5,3 +5,5 @@
 structure/.*
 hardware/.*
 software/.*
+pic/.*
+doc/.*
